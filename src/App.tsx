@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
 import SignIn from './_auth/forms/SignIn'
 import SignUp from './_auth/forms/SignUp'
-import Home from './_root/pages/Home'
 import AuthLayout from './_auth/AuthLayout'
 import RootLayout from './_root/RootLayout'
 import About from './_root/pages/About'
+import Home from './_root/pages/home'
 
 function App() {
   return (
