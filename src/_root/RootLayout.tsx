@@ -77,9 +77,6 @@ const RootLayout = () => {
 						<div className="flex items-center gap-2">
 							<ModeToggle />
 						</div>
-						<TextEffect className="text-3xl ml-12 font-semibold" per='char' preset='fade'>
-							Home Feed
-						</TextEffect>
 						<section className="px-4">
 							<Outlet />
 						</section>

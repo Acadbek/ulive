@@ -1,12 +1,16 @@
 import ICard from "@/components/shared/reusable-card"
 import FeedCard from "./components/FeedCard"
 import TopCreatorCard from "./components/TopCreatorCard"
+import { TextEffect } from "@/components/ui/text-effect"
 // import FeedCard from "./components/Card"
 
 const Home = () => {
   return (
     <div className="grid grid-cols-12 gap-4">
-      <div className="pt-8 col-span-8">
+      <div className="pt-4 col-span-8">
+        <TextEffect className="text-3xl mb-4 ml-12 font-semibold" per='char' preset='fade'>
+          Home Feed
+        </TextEffect>
         <div className="flex flex-col gap-3">
           <FeedCard />
           <FeedCard />

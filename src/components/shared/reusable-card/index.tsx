@@ -1,27 +1,31 @@
 import FollowButton from "../follow-button"
+import { Link } from 'react-router-dom'
 
 type ICardProps = {
+  path?: string,
   img: string,
-  isSavedCard: boolean,
-  isFollowCard: boolean,
+  isSavedCard?: boolean,
+  isFollowCard?: boolean,
 }
 
-const ICard = ({ img, isSavedCard, isFollowCard = true }: ICardProps) => {
+const ICard = ({ path, img, isSavedCard, isFollowCard }: ICardProps) => {
   return (
-    <div className="h-[220px] border rounded-lg font-semibold">
-      <img src={img} className='absolute rounded-lg h-[220px] w-[275px] object-cover z-[-1] opacity-30' alt="" />
+    <Link to={`/posts/${path}`} className="h-[220px] w-[300px] border rounded-lg font-semibold">
+      <img src={img} className='absolute w-[300px] rounded-lg h-[220px] object-cover z-[-1] opacity-30' alt="" />
       {isFollowCard === true
         ?
         <div className='h-full flex flex-col items-center justify-center'>
           <img className='w-[55px] h-[55px] rounded-full' src='https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Wayfarers&hairColor=BlondeGolden&facialHairType=Blank&facialHairColor=BrownDark&clotheType=Hoodie&clotheColor=Heather&eyeType=Wink&eyebrowType=Angry&mouthType=Twinkle&skinColor=Yellow' />
           <p className='text-sm mt-1'>Afruzbek Risqitillayev</p>
           <p className='text-sm mt-1'>@username</p>
-          <FollowButton title="Follow" />
+          <div className="mt-2">
+            <FollowButton title="Follow" />
+          </div>
         </div>
         : <div className='flex h-full items-end justify-between p-2 gap-3'>
-          <div className='flex items-end'>
+          <div className='flex items-start gap-2'>
             <img className='w-[35px] h-[35px] object-cover' src='https://avataaars.io/?avatarStyle=Circle&topType=WinterHat3&accessoriesType=Prescription01&hatColor=Red&facialHairType=MoustacheFancy&facialHairColor=Platinum&clotheType=Hoodie&clotheColor=PastelGreen&eyeType=Hearts&eyebrowType=RaisedExcitedNatural&mouthType=Twinkle&skinColor=Brown' />
-            <h3 title='John Doe John Doe John Doe' className='font-semibold dark:text-white text-sm text-black/70 line-clamp-1'>John Doe John Doe John Doe</h3>
+            <h3 title='John Doe John Doe John Doe' className='font-semibold dark:text-white text-sm text-black/70 line-clamp-3'>Advanced DNS Attacks: Poisoning and Exploitation Advanced DNS Attacks: Poisoning and Exploitation</h3>
           </div>
           {!isSavedCard &&
             <div className='flex items-center gap-3'>
@@ -36,7 +40,7 @@ const ICard = ({ img, isSavedCard, isFollowCard = true }: ICardProps) => {
           }
         </div>
       }
-    </div>
+    </Link>
   )
 }
 
