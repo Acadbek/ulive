@@ -1,23 +1,20 @@
-import React from 'react'
-// /src/assets/images/post2.jpg
-
 type ICardProps = {
   img: string,
   isSavedCard: boolean,
-  followCard: boolean
+  isFollowCard: boolean,
 }
 
-const ICard = ({ img, isSavedCard, followCard = true }: ICardProps) => {
+const ICard = ({ img, isSavedCard, isFollowCard = true }: ICardProps) => {
   return (
     <div className="h-[220px] rounded-lg font-semibold">
-      <img src={img} className='absolute rounded-lg h-[220px] w-[275px] object-cover z-[-1] opacity-50' alt="" />
-      {followCard === true
+      <img src={img} className='absolute rounded-lg h-[220px] w-[275px] object-cover z-[-1] opacity-30' alt="" />
+      {isFollowCard === true
         ?
-        <div className='h-full gap-3 flex flex-col items-center justify-center'>
+        <div className='h-full flex flex-col items-center justify-center'>
           <img className='w-[55px] h-[55px] rounded-full' src='https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Wayfarers&hairColor=BlondeGolden&facialHairType=Blank&facialHairColor=BrownDark&clotheType=Hoodie&clotheColor=Heather&eyeType=Wink&eyebrowType=Angry&mouthType=Twinkle&skinColor=Yellow' />
-          <p>name</p>
-          <p>@username</p>
-          <button>Follow</button>
+          <p className='text-sm mt-1'>Afruzbek Risqitillayev</p>
+          <p className='text-sm mt-1'>@username</p>
+          <button className='w-[100px] mt-3 h-[34px] bg-white dark:text-black hover:bg-white/70 transition rounded-sm text-[12px]'>Follow</button>
         </div>
         : <div className='flex h-full items-end justify-between p-2 gap-3'>
           <div className='flex items-end'>

@@ -75,7 +75,6 @@ const RootLayout = () => {
 					</div>
 					<div className='col-span-7'>
 						<div className="flex items-center gap-2">
-							<SidebarTrigger />
 							<ModeToggle />
 						</div>
 						<TextEffect className="text-3xl ml-12 font-semibold" per='char' preset='fade'>
