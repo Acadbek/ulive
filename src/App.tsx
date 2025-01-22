@@ -5,6 +5,8 @@ import AuthLayout from './_auth/AuthLayout'
 import RootLayout from './_root/RootLayout'
 import About from './_root/pages/About'
 import Home from './_root/pages/home'
+import ExplorePage from './_root/pages/explore'
+import NotFoundPage from './_root/pages/404'
 
 function App() {
   return (
@@ -19,7 +21,10 @@ function App() {
       <Route element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path='/about' element={<About />} />
+        <Route path='/explore' element={<ExplorePage />} />
       </Route>
+
+      <Route path='*' element={<NotFoundPage />} />
     </Routes>
   )
 }

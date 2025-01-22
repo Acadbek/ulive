@@ -18,27 +18,27 @@ import { ModeToggle } from "@/components/shared/theme/mode-toggle"
 const items = [
 	{
 		title: "Home",
-		url: "#",
+		url: "/",
 		icon: Home,
 	},
 	{
 		title: "Explore",
-		url: "#",
+		url: "/explore",
 		icon: Inbox,
 	},
 	{
 		title: "People",
-		url: "#",
+		url: "/people",
 		icon: PersonStanding,
 	},
 	{
 		title: "Saved",
-		url: "#",
+		url: "/saved",
 		icon: SaveAll,
 	},
 	{
 		title: "Create post",
-		url: "#",
+		url: "/create-post",
 		icon: MessageCircle,
 	},
 ]
@@ -73,7 +73,7 @@ const RootLayout = () => {
 							</SidebarContent>
 						</Sidebar>
 					</div>
-					<div className='col-span-7'>
+					<div className='col-span-10'>
 						<div className="flex items-center gap-2">
 							<ModeToggle />
 						</div>
@@ -84,7 +84,6 @@ const RootLayout = () => {
 							<Outlet />
 						</section>
 					</div>
-					<div style={{ border: 'solid 2px red' }} className='col-span-3'>1</div>
 				</main>
 			</Parent>
 		</ThemeProvider>
