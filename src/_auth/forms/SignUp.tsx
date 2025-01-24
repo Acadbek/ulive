@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Link } from "react-router-dom"
 import Loader from "@/components/shared/Loader"
 import { createUserAccount } from "@/lib/appwrite/api"
+import { useToast } from "@/hooks/use-toast"
 
 const SignUpValidation = z.object({
   name: z.string().min(2, { message: 'To short' }),
@@ -23,6 +24,7 @@ const SignUpValidation = z.object({
 })
 
 const SignUp = () => {
+  const { toast } = useToast()
   const isLoading = false;
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
@@ -37,8 +39,13 @@ const SignUp = () => {
   async function onSubmit(values: z.infer<typeof SignUpValidation>) {
     const newUser = await createUserAccount(values);
 
-    console.log(newUser);
+    if (!newUser) {
+      return; toast({
+        title: "Sign up failed",
+      })
+    }
 
+    // const session = await signInAccount()
   }
   return (
     <Form {...form}>
