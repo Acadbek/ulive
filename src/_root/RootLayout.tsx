@@ -10,7 +10,7 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Logo from "@/components/shared/Logo"
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { TextEffect } from "@/components/ui/text-effect"
 import { ThemeProvider } from "@/components/shared/theme/theme-provider"
 import { ModeToggle } from "@/components/shared/theme/mode-toggle"
@@ -60,10 +60,10 @@ const RootLayout = () => {
 											{items.map((item) => (
 												<SidebarMenuItem key={item.title}>
 													<SidebarMenuButton asChild>
-														<a href={item.url}>
+														<Link to={item.url}>
 															<item.icon />
 															<span>{item.title}</span>
-														</a>
+														</Link>
 													</SidebarMenuButton>
 												</SidebarMenuItem>
 											))}
