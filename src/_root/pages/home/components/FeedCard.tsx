@@ -4,7 +4,7 @@ import { Heart, PaintBucket } from 'lucide-react';
 
 const FeedCard = () => {
   return (
-    <Card className='p-4 shadow-none'>
+    <Card className='p-4 shadow-none max-w-[600px] w-full'>
       <div className='cursor-pointer flex items-start gap-2'>
         <img width={50} height="50" src='https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light' />
         <div>

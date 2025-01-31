@@ -11,10 +11,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "@/components/shared/Loader";
 import { useToast } from "@/hooks/use-toast";
-import { useCreateUserAccountMutation, useSignInAccountMutation } from "@/lib/tanstack-query/queriesAndMutations";
+import { useCreateUserAccountMutation, useSignInAccountMutation } from "../../lib/tanstack-query/queriesAndMutations";
+import { useNavigate } from 'react-router-dom'
 import { useUserContext } from "../../context/AuthContext";
 
 const SignUpValidation = z.object({
@@ -25,19 +26,21 @@ const SignUpValidation = z.object({
 });
 
 const SignUp = () => {
-  const { toast } = useToast();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
-  const navigate = useNavigate()
+  // useCreateUserAccountMutation: orqali foydalanuvchi akkauntini yaratish uchun `mutateAsync` va holatni (`isLoading`) olamiz.
 
   const {
     mutateAsync: createUserAccount, // Foydalanuvchi akkauntini yaratish uchun ishlatiladigan funktsiya.
-    isPending: isCreatingUser, // Akkount yaratish jarayoni davom etayotganini bildiradi.
+    isLoading: isCreatingUser, // Akkount yaratish jarayoni davom etayotganini bildiradi.
   } = useCreateUserAccountMutation();
 
   const {
-    mutateAsync: signInAccount,
-    isPending: isSignInAccount
-  } = useSignInAccountMutation()
+    mutateAsync: signInAccount, // `signInAccount` funksiyasini `mutateAsync` orqali o'zgartirish.
+    isLoading: isSignInAccount // Akkauntga kirish jarayoni davomida yuklanish holatini tekshirish uchun.
+  } = useSignInAccountMutation(); // Tizimga kirish uchun maxsus mutation hook.
+
+  const navigate = useNavigate()
+  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(SignUpValidation),
@@ -54,38 +57,48 @@ const SignUp = () => {
       // Foydalanuvchi ma'lumotlari serverga jo'natilmoqda
       const newUser = await createUserAccount(values);
 
-      // Agar foydalanuvchi yaratilmasa, muvaffaqiyatsizlik haqida xabar ko'rsatiladi.
       if (!newUser) {
         return toast({
+          variant: 'destructive',
           title: 'Sign up failed', // Toast xabari matni.
         });
       }
 
-      // TODO: Tizimga avtomatik kirish qo'shish
+      // Foydalanuvchini tizimga kirish uchun `signInAccount` funksiyasini chaqiramiz.
       const session = await signInAccount({
-        email: values.email,
-        password: values.password
+        email: values.email, // Foydalanuvchi emaili.
+        password: values.password // Foydalanuvchi paroli.
       });
 
       if (!session) {
-        toast({ title: "Something went wrong. Please login your new account", });
+        // Xato xabari foydalanuvchiga ko'rsatiladi.
+        toast({
+          title: "Something went wrong. Please login your new account"
+        });
+
+        // Foydalanuvchini tizimga kirish sahifasiga yo'naltirish.
         navigate("/sign-in");
-        return;
+
+        return; // Funksiyani to'xtatish.
       }
 
       const isLoggedIn = await checkAuthUser();
 
+      // Agar foydalanuvchi tizimda bo'lsa, formani tozalash va bosh sahifaga yo'naltirish
       if (isLoggedIn) {
-        form.reset()
-        navigate('/')
+        form.reset(); // Forma qiymatlarini tozalash
+        navigate('/'); // Bosh sahifaga yo'naltirish
       } else {
-        return toast({ title: 'Sign up failed. Please try again' })
+        // Agar foydalanuvchi tizimda bo'lmasa, xatolikni bildirish
+        return toast({
+          title: 'Sign up failed. Please try again' // Xatolikni bildirish
+        });
       }
 
     } catch (error) {
-      // Xato yuz bersa, foydalanuvchiga xabar beriladi.
       console.error('Error creating account:', error);
       toast({
+        // variant: "destructive",
         title: 'An error occurred',
         description: error.message,
         status: 'error',
@@ -150,7 +163,7 @@ const SignUp = () => {
             )}
           />
           <Button type="submit">
-            {isCreatingUser ? <Loader /> : "Sign up"}
+            <Loader /> Sign up
           </Button>
 
           <p className="text-small-regular text-light-3 text-center mt-2">
