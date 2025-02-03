@@ -24,6 +24,9 @@ const ExplorePage = () => {
           <ICard img="https://miro.medium.com/v2/resize:fit:875/0*_qQTh3Khqho-FDUf" isFollowCard={false} />
           <ICard img="https://miro.medium.com/v2/resize:fit:875/0*_qQTh3Khqho-FDUf" isFollowCard={false} />
           <ICard img="https://miro.medium.com/v2/resize:fit:875/0*_qQTh3Khqho-FDUf" isFollowCard={false} />
+          <ICard img="https://miro.medium.com/v2/resize:fit:875/0*_qQTh3Khqho-FDUf" isFollowCard={false} />
+          <ICard img="https://miro.medium.com/v2/resize:fit:875/0*_qQTh3Khqho-FDUf" isFollowCard={false} />
+          <ICard img="https://miro.medium.com/v2/resize:fit:875/0*_qQTh3Khqho-FDUf" isFollowCard={false} />
         </div>
       </section>
     </div>
